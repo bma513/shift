@@ -5,6 +5,7 @@ import requests
 import json
 
 app = Flask(__name__)
+client = Cliente('96d3610203e0fdc31009c2694afe135c', 'https://api2.totalvoice.com.br/sms')  # ex: api.totalvoice.com.br
 
 @app.route('/', methods=['GET', 'POST'])
 def init():
@@ -27,7 +28,7 @@ def listToken():
 def sms():
     phone = request.form['email']
     message = request.form['name']
-    client = Cliente('96d3610203e0fdc31009c2694afe135c', 'https://api2.totalvoice.com.br/sms')  # ex: api.totalvoice.com.br
+
     response = client.sms.enviar(phone, message)
 
     return response
