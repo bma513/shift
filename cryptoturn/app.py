@@ -21,7 +21,7 @@ def getToken():
 @app.route('/listtokens', methods=['GET', 'POST'])
 def listToken():
 
-    return {'tokens_origem':['BTC'],'tokens_destino': ['ETH','IOTA','XRP']}
+    return {'source_tokens':['BTC'],'final_tokens': ['ETH','IOTA','XRP']}
 
 @app.route('/sendsms', methods=['GET', 'POST'])
 def sms():
