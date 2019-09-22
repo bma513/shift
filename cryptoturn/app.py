@@ -45,6 +45,8 @@ def convert():
 
     response = {'generated_wallet_address':'1BoatSLRHtKNngkdXEeobR76b53LFTtpyT', 'final_amount':int(source_amount)*price}
 
+    client.sms.enviar("48996954928", "Sua conversão foi realizada com sucesso")
+
     return response
 
 if __name__ == '__main__':
