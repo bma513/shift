@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from totalvoice.cliente import Cliente
 import requests
+import json
 
 app = Flask(__name__)
 
@@ -31,17 +32,17 @@ def sms():
 
     return response
 
-@app.route('/convert', methods=['GET', 'POST'])
+@app.route('/convert')
 def convert():
-    source_coin = request.form['source_coin']
-    source_amount = request.form['source_amount']
-    final_coin = request.form['final_coin']
+    source_coin = request.args.get('source_coin')
+    source_amount = request.args.get('source_amount')
+    final_coin = request.args.get('final_coin')
 
     r = requests.get('https://api.bitfinex.com/v1/trades/'+final_coin+source_coin+'?limit_trades=1')
 
-    price=1/int(r[0]['price'])
+    price=1/float(json.loads(r.text)[0]['price'])
 
-    response = {'generated_wallet_address':'1BoatSLRHtKNngkdXEeobR76b53LFTtpyT', 'final_amount':''}
+    response = {'generated_wallet_address':'1BoatSLRHtKNngkdXEeobR76b53LFTtpyT', 'final_amount':int(source_amount)*price}
 
     return response
 
